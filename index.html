@@ -3,21 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobmington - The Future of African Talent</title>
+    <title>Jobmington | The Future of Work</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: white; text-align: center; padding: 50px 20px; }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #38bdf8; }
-        p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 0 auto 30px; }
-        .container { max-width: 600px; margin: auto; }
-        .btn { background: #38bdf8; color: #0f172a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Jobmington</h1>
-        <p>We are building the smartest career engine for African talent, powered by Andika AI.</p>
-        <p><strong>Something "Super Doper" is coming.</strong></p>
-        <a href="mailto:founder@jobmington.com" class="btn">Contact the Founder</a>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+
+    <div class="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+    <div class="absolute top-0 right-0 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+
+    <div class="z-10 text-center max-w-2xl bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-slate-700 shadow-2xl">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wide mb-6">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            Coming Soon
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+            Find your next <br>
+            <span class="gradient-text">Big Opportunity.</span>
+        </h1>
+
+        <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+            The smartest career engine for African talent. <br>
+            Powered by <strong class="text-white">Andika AI</strong> and <strong class="text-white">Truthsprout</strong>.
+        </p>
+
+        <a href="mailto:founder@jobmington.com" class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1">
+            Get Early Access
+            <svg class="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+        </a>
+
+        <div class="mt-8 pt-8 border-t border-slate-700/50 flex justify-center gap-6 text-slate-500 text-sm">
+            <span>🚀 Loading in 0.8s</span>
+            <span>🔒 Secured by Cloudflare</span>
+        </div>
     </div>
+
 </body>
 </html>
+
