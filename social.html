@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobmington Studio | Onyx</title>
+    <title>Jobmington Studio | Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
@@ -19,43 +19,64 @@
         }
     </script>
     <style>
-        /* The Onyx DNA */
-        .bg-noise { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); }
+        /* 1. THE GRID PATTERN (Pure CSS) */
+        .bg-grid {
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
         
-        /* The Master Canvas - Always fixed at 1080p */
+        /* 2. THE MASTER CANVAS (Fixed 1080p) */
         #capture-target {
             width: 1080px;
             height: 1080px;
-            background-color: #000000;
+            background-color: #000;
             position: relative;
             flex-shrink: 0;
             overflow: hidden;
         }
 
-        /* Preview Container - Handles the scaling visually */
+        /* 3. PREVIEW WRAPPER */
         #preview-wrapper {
             width: 100%;
             display: flex;
             justify-content: center;
             overflow: hidden;
-            background: #0B1121; /* Dark slate background for the tool area */
+            background: #0f172a;
             padding: 20px 0;
-            border-bottom: 1px solid #1e293b;
+        }
+
+        /* Glass Container inside the canvas */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px); /* Extreme Blur */
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
-<body class="bg-black text-white min-h-screen pb-20">
+<body class="bg-black text-white min-h-screen pb-40">
 
-    <div class="fixed bottom-0 left-0 w-full bg-slate-900 border-t border-slate-800 p-4 z-50 flex flex-col gap-3">
+    <div class="fixed bottom-0 left-0 w-full bg-slate-900/90 backdrop-blur-md border-t border-slate-700 p-4 z-50 flex flex-col gap-3">
+        
         <div class="flex gap-2">
-            <input type="text" id="headlineInput" value="We Are Hiring." oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-3 rounded text-white text-sm focus:outline-none focus:border-indigo-500" placeholder="Headline">
-            <button onclick="downloadHD()" id="downloadBtn" class="bg-indigo-600 text-white font-bold px-6 rounded text-sm whitespace-nowrap active:scale-95 transition-transform">
-                Save HD
+            <input type="text" id="headlineInput" value="Hiring Now." oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-3 rounded text-white text-sm focus:outline-none focus:border-indigo-500 font-bold" placeholder="Headline">
+            <button onclick="downloadHD()" id="downloadBtn" class="bg-white text-black font-extrabold px-6 rounded text-sm whitespace-nowrap active:scale-95 transition-transform">
+                SAVE IMG
             </button>
         </div>
+        
         <div class="flex gap-2">
-             <input type="text" id="subtextInput" value="Senior PHP Dev needed." oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none focus:border-indigo-500" placeholder="Subtext">
-             <input type="text" id="badgeInput" value="Lagos / Remote" oninput="updateCard()" class="w-1/3 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none focus:border-indigo-500" placeholder="Badge">
+             <input type="text" id="subtextInput" value="Senior Backend Eng. (Lagos)" oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none" placeholder="Subtext">
+             <input type="text" id="badgeInput" value="Remote" oninput="updateCard()" class="w-1/3 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none" placeholder="Badge">
+        </div>
+
+        <div class="flex gap-2 pt-2 border-t border-slate-700">
+            <button onclick="setTheme('onyx')" class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-indigo-900 text-indigo-200 rounded hover:bg-indigo-800">Onyx</button>
+            <button onclick="setTheme('magma')" class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-orange-900 text-orange-200 rounded hover:bg-orange-800">Magma</button>
+            <button onclick="setTheme('mint')" class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-emerald-900 text-emerald-200 rounded hover:bg-emerald-800">Mint</button>
         </div>
     </div>
 
@@ -63,43 +84,48 @@
         
         <div id="capture-target">
             
-            <div class="absolute inset-0 bg-noise opacity-30 z-10"></div>
-            <div class="absolute top-[-30%] left-[-20%] w-[90%] h-[90%] bg-indigo-600/20 rounded-full blur-[200px]"></div>
-            <div class="absolute bottom-[-20%] right-[-20%] w-[70%] h-[70%] bg-blue-800/20 rounded-full blur-[180px]"></div>
+            <div class="absolute inset-0 bg-grid z-0 opacity-40"></div>
+            
+            <div id="aura1" class="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-indigo-600/30 rounded-full blur-[200px] transition-colors duration-500"></div>
+            <div id="aura2" class="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-600/20 rounded-full blur-[180px] transition-colors duration-500"></div>
 
-            <div class="relative z-20 h-full flex flex-col justify-between p-24">
+            <div class="relative z-10 h-full flex flex-col justify-between p-16">
                 
-                <div class="flex justify-between items-start">
-                    <div class="flex items-center gap-5">
-                        <img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-20 w-auto object-contain">
-                        <span class="text-5xl font-bold tracking-tight text-white">Jobmington</span>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-16 w-auto">
+                        <span class="text-4xl font-bold tracking-tight">Jobmington</span>
                     </div>
-                    
-                    <div id="cardBadge" class="px-8 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl text-2xl font-bold text-indigo-300 uppercase tracking-widest shadow-lg">
-                        Lagos / Remote
+                    <div class="flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10">
+                        <div id="statusDot" class="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></div>
+                        <span class="text-xl font-bold text-slate-300 tracking-widest uppercase">System Active</span>
                     </div>
                 </div>
 
-                <div class="space-y-8">
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xl font-bold uppercase tracking-widest">
-                        <span class="w-3 h-3 rounded-full bg-indigo-400 animate-pulse"></span>
-                        New Alert
+                <div class="glass-box rounded-[40px] p-16 border-t-2 border-l-2 border-white/20 relative overflow-hidden">
+                    <div class="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 animate-[shimmer_3s_infinite]"></div>
+                    
+                    <div id="cardBadge" class="inline-block px-6 py-2 mb-8 rounded-lg bg-white text-black text-2xl font-bold uppercase tracking-widest">
+                        Remote
                     </div>
-                    
-                    <h1 id="cardHeadline" class="text-[120px] font-extrabold tracking-tighter leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-indigo-300">
-                        We Are Hiring.
+
+                    <h1 id="cardHeadline" class="text-[110px] font-extrabold tracking-tighter leading-[0.95] mb-6 text-white drop-shadow-2xl">
+                        Hiring Now.
                     </h1>
-                    
-                    <p id="cardSubtext" class="text-5xl text-slate-400 font-medium max-w-5xl leading-tight border-l-4 border-indigo-500 pl-8">
-                        Senior PHP Dev needed.
+
+                    <p id="cardSubtext" class="text-5xl text-slate-300 font-medium leading-tight">
+                        Senior Backend Eng. (Lagos)
                     </p>
                 </div>
 
-                <div class="border-t border-white/10 pt-12 flex justify-between items-center">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl text-slate-500 font-bold uppercase tracking-widest">Powered by Andika AI™</span>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <div class="text-2xl text-slate-500 font-bold uppercase tracking-widest mb-2">Powered by</div>
+                        <div class="text-4xl text-white font-bold">Andika AI™</div>
                     </div>
-                    <div class="text-3xl text-white font-bold">jobmington.com</div>
+                    <div class="w-24 h-24 bg-white/10 rounded-xl flex items-center justify-center border border-white/20">
+                        <svg class="w-12 h-12 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </div>
                 </div>
 
             </div>
@@ -107,63 +133,85 @@
     </div>
 
     <script>
-        // 1. Force the preview to fit your phone screen
-        function resizePreview() {
-            const card = document.getElementById('capture-target');
-            const wrapper = document.getElementById('preview-wrapper');
-            
-            // Calculate scale based on screen width (with some padding)
-            const screenWidth = window.innerWidth;
-            const scale = (screenWidth - 40) / 1080; // Leave 40px margin
-            
-            card.style.transform = `scale(${scale})`;
-            card.style.transformOrigin = 'top center';
-            
-            // Adjust wrapper height so it doesn't take up 1080px vertical space
-            wrapper.style.height = `${1080 * scale + 40}px`;
+        // --- 1. THEME ENGINE ---
+        function setTheme(theme) {
+            const aura1 = document.getElementById('aura1');
+            const aura2 = document.getElementById('aura2');
+            const badge = document.getElementById('cardBadge');
+            const dot = document.getElementById('statusDot');
+            const headline = document.getElementById('cardHeadline');
+
+            if (theme === 'onyx') {
+                // Indigo / Blue
+                aura1.className = "absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-indigo-600/30 rounded-full blur-[200px] transition-colors duration-500";
+                aura2.className = "absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-600/20 rounded-full blur-[180px] transition-colors duration-500";
+                badge.className = "inline-block px-6 py-2 mb-8 rounded-lg bg-indigo-500 text-white text-2xl font-bold uppercase tracking-widest";
+                dot.className = "w-3 h-3 rounded-full bg-indigo-500 animate-pulse";
+            } 
+            else if (theme === 'magma') {
+                // Orange / Red
+                aura1.className = "absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-orange-600/30 rounded-full blur-[200px] transition-colors duration-500";
+                aura2.className = "absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-red-600/20 rounded-full blur-[180px] transition-colors duration-500";
+                badge.className = "inline-block px-6 py-2 mb-8 rounded-lg bg-orange-500 text-white text-2xl font-bold uppercase tracking-widest";
+                dot.className = "w-3 h-3 rounded-full bg-orange-500 animate-pulse";
+            }
+            else if (theme === 'mint') {
+                // Emerald / Teal
+                aura1.className = "absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-emerald-600/30 rounded-full blur-[200px] transition-colors duration-500";
+                aura2.className = "absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-teal-600/20 rounded-full blur-[180px] transition-colors duration-500";
+                badge.className = "inline-block px-6 py-2 mb-8 rounded-lg bg-emerald-500 text-black text-2xl font-bold uppercase tracking-widest";
+                dot.className = "w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
+            }
         }
 
-        // 2. Update Text Live
+        // --- 2. LIVE TEXT UPDATES ---
         function updateCard() {
             document.getElementById('cardHeadline').innerText = document.getElementById('headlineInput').value;
             document.getElementById('cardSubtext').innerText = document.getElementById('subtextInput').value;
             document.getElementById('cardBadge').innerText = document.getElementById('badgeInput').value;
         }
 
-        // 3. HD Download Engine
+        // --- 3. MOBILE PREVIEW SCALER ---
+        function resizePreview() {
+            const card = document.getElementById('capture-target');
+            const wrapper = document.getElementById('preview-wrapper');
+            const screenWidth = window.innerWidth;
+            const scale = (screenWidth - 20) / 1080; 
+            
+            card.style.transform = `scale(${scale})`;
+            card.style.transformOrigin = 'top center';
+            wrapper.style.height = `${1080 * scale + 20}px`;
+        }
+
+        // --- 4. HD DOWNLOAD ---
         function downloadHD() {
             var node = document.getElementById('capture-target');
             var btn = document.getElementById('downloadBtn');
-            var originalText = btn.innerHTML;
+            var originalText = btn.innerText;
 
-            btn.innerHTML = 'Rendering...';
+            btn.innerText = '...';
             
-            // Magic settings to ignore the phone's scale and capture full 1080p
             var options = {
                 width: 1080,
                 height: 1080,
-                pixelRatio: 1, // Force 1:1 pixel mapping
-                style: {
-                    transform: 'none', // Remove the scaling used for preview
-                    transformOrigin: 'top left'
-                }
+                pixelRatio: 1,
+                style: { transform: 'none', transformOrigin: 'top left' }
             };
 
             htmlToImage.toPng(node, options)
                 .then(function (dataUrl) {
-                    download(dataUrl, 'Jobmington-Onyx.png');
-                    btn.innerHTML = originalText;
+                    download(dataUrl, 'Jobmington-Pro.png');
+                    btn.innerText = originalText;
                 })
                 .catch(function (error) {
-                    console.error('Error:', error);
-                    alert('Error. Try refreshing the page.');
-                    btn.innerHTML = originalText;
+                    alert('Error. Refresh page.');
+                    btn.innerText = originalText;
                 });
         }
 
         window.addEventListener('resize', resizePreview);
         window.addEventListener('load', resizePreview);
-        resizePreview(); // Run immediately
+        resizePreview();
     </script>
 </body>
 </html>
