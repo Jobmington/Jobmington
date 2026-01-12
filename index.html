@@ -18,6 +18,7 @@
                     animation: {
                         'spotlight': 'spotlight 2s ease .75s 1 forwards',
                         'shimmer': 'shimmer 2s linear infinite',
+                        'marquee': 'marquee 15s linear infinite', // Slowed down slightly for readability
                     },
                     keyframes: {
                         spotlight: {
@@ -27,6 +28,10 @@
                         shimmer: {
                             from: { backgroundPosition: '0 0' },
                             to: { backgroundPosition: '-200% 0' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
                         }
                     }
                 }
@@ -62,8 +67,22 @@
             <span class="text-xl font-bold tracking-tight text-white">Jobmington</span>
         </div>
 
-        <div class="text-[10px] md:text-xs font-semibold tracking-widest text-slate-500 uppercase border border-white/10 px-3 py-1.5 rounded-full bg-white/5 backdrop-blur-md">
-            A Truthsprout Initiative
+        <div class="border border-white/10 rounded-full bg-white/5 backdrop-blur-md overflow-hidden w-48 md:w-64 h-8 relative flex items-center shadow-lg shadow-indigo-500/10">
+            <div class="flex whitespace-nowrap animate-marquee text-[10px] md:text-xs font-semibold tracking-widest text-slate-400 uppercase absolute left-0">
+                <span class="px-2 text-white">A Truthsprout Initiative</span>
+                <span class="px-2 text-indigo-500">•</span>
+                <span class="px-2 text-white">Powered by Andika AI</span>
+                <span class="px-2 text-indigo-500">•</span>
+                <span class="px-2 text-white">Bridging Opportunity & Talent</span>
+                <span class="px-2 text-indigo-500">•</span>
+                
+                <span class="px-2 text-white">A Truthsprout Initiative</span>
+                <span class="px-2 text-indigo-500">•</span>
+                <span class="px-2 text-white">Powered by Andika AI</span>
+                <span class="px-2 text-indigo-500">•</span>
+                <span class="px-2 text-white">Bridging Opportunity & Talent</span>
+                <span class="px-2 text-indigo-500">•</span>
+            </div>
         </div>
     </nav>
 
@@ -153,3 +172,4 @@
 
 </body>
 </html>
+
