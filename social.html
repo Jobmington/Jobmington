@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobmington Studio | Shapeshifter</title>
+    <title>Jobmington Studio | True Onyx</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
@@ -22,23 +22,22 @@
         }
     </script>
     <style>
-        /* Shared Assets */
-        .bg-noise { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); }
+        /* --- EXACT ASSETS FROM LANDING PAGE --- */
+        .bg-noise { 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); 
+        }
         
+        /* The Bento Glass Effect */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px); /* Increased for graphics */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
         /* Layout Structure */
         #capture-target { width: 1080px; height: 1080px; background-color: #000; position: relative; flex-shrink: 0; overflow: hidden; }
         #preview-wrapper { width: 100%; display: flex; justify-content: center; overflow: hidden; background: #0f172a; padding: 20px 0; border-bottom: 1px solid #1e293b; }
-        
-        /* Striped Pattern for News Mode */
-        .hazard-stripes {
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(255,255,255,0.03),
-                rgba(255,255,255,0.03) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-        }
     </style>
 </head>
 <body class="bg-black text-white min-h-screen pb-44">
@@ -46,150 +45,131 @@
     <div class="fixed bottom-0 left-0 w-full bg-slate-900/95 backdrop-blur-md border-t border-slate-700 p-4 z-50 flex flex-col gap-3">
         <div class="flex gap-2">
             <input type="text" id="headlineInput" oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-3 rounded text-white text-sm focus:outline-none focus:border-indigo-500 font-bold" placeholder="Headline">
-            <button onclick="downloadHD()" id="downloadBtn" class="bg-white text-black font-extrabold px-4 rounded text-xs whitespace-nowrap active:scale-95 transition-transform uppercase tracking-wider">
-                Download
+            <button onclick="downloadHD()" id="downloadBtn" class="bg-indigo-600 text-white font-extrabold px-4 rounded text-xs whitespace-nowrap active:scale-95 transition-transform uppercase tracking-wider shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+                Save HD
             </button>
         </div>
-        
         <div class="flex gap-2">
              <input type="text" id="subtextInput" oninput="updateCard()" class="flex-1 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none" placeholder="Subtext">
              <input type="text" id="badgeInput" oninput="updateCard()" class="w-1/3 bg-black border border-slate-700 p-2 rounded text-slate-400 text-xs focus:outline-none" placeholder="Badge">
         </div>
-
         <div class="flex gap-2 pt-2 border-t border-slate-700">
-            <button onclick="setLayout('recruit')" class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-slate-800 text-indigo-300 border border-slate-700 rounded hover:bg-slate-700 focus:ring-2 ring-indigo-500">Recruit</button>
+            <button onclick="setLayout('onyx')" class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-slate-800 text-indigo-300 border border-slate-700 rounded hover:bg-slate-700 focus:ring-2 ring-indigo-500">Onyx (Official)</button>
             <button onclick="setLayout('quote')" class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-slate-800 text-purple-300 border border-slate-700 rounded hover:bg-slate-700 focus:ring-2 ring-purple-500">Quote</button>
             <button onclick="setLayout('news')" class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest bg-slate-800 text-orange-300 border border-slate-700 rounded hover:bg-slate-700 focus:ring-2 ring-orange-500">News</button>
         </div>
     </div>
 
     <div id="preview-wrapper">
-        <div id="capture-target">
-            </div>
+        <div id="capture-target"></div>
     </div>
 
     <script>
-        // Default text content
         let state = {
             headline: "We Are Hiring.",
-            subtext: "Senior PHP Dev needed in Lagos.",
-            badge: "Apply Now"
+            subtext: "Senior PHP Dev needed.",
+            badge: "Lagos / Remote"
         };
 
-        // --- TEMPLATE DEFINITIONS ---
         const templates = {
             
-            // 1. RECRUIT (Tech / Grid / Glass)
-            recruit: `
+            // --- THE TRUE ONYX TEMPLATE (Exact Landing Page DNA) ---
+            onyx: `
                 <div class="absolute inset-0 bg-black z-0">
                     <div class="absolute inset-0 bg-noise opacity-30"></div>
-                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.5;"></div>
-                    <div class="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-indigo-600/30 rounded-full blur-[200px]"></div>
+                    <div class="absolute top-[-30%] left-[-20%] w-[90%] h-[90%] bg-indigo-600/20 rounded-full blur-[200px]"></div>
+                    <div class="absolute bottom-[-20%] right-[-20%] w-[70%] h-[70%] bg-blue-900/20 rounded-full blur-[180px]"></div>
                 </div>
 
-                <div class="relative z-10 h-full p-12 flex flex-col justify-between">
-                    <div class="flex justify-between items-start">
+                <div class="relative z-10 h-full p-16 flex flex-col justify-between">
+                    
+                    <div class="flex justify-between items-center">
                         <div class="flex items-center gap-4">
                             <img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-16 w-auto">
-                            <span class="text-3xl font-bold text-white tracking-tight">Jobmington</span>
+                            <span class="text-4xl font-bold tracking-tight text-white">Jobmington</span>
                         </div>
-                        <div id="cardBadge" class="bg-indigo-600 text-white px-6 py-2 rounded-full text-xl font-bold uppercase tracking-widest shadow-[0_0_30px_rgba(79,70,229,0.4)]"></div>
+                        <div class="border border-white/10 rounded-full bg-white/5 backdrop-blur-md px-6 py-2">
+                             <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase">A Truthsprout Initiative</span>
+                        </div>
                     </div>
 
-                    <div class="border border-white/10 bg-white/5 backdrop-blur-xl p-12 rounded-[40px] relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-indigo-500"></div>
-                        <h1 id="cardHeadline" class="text-[100px] font-extrabold leading-[0.9] text-white mb-6"></h1>
-                        <p id="cardSubtext" class="text-4xl text-slate-300 font-medium"></p>
+                    <div class="flex-grow flex flex-col justify-center py-12">
+                        <div class="inline-flex w-fit items-center gap-3 px-4 py-2 mb-8 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-bold uppercase tracking-widest">
+                            <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                            System Online
+                        </div>
+
+                        <div class="bento-card rounded-[40px] p-16 relative overflow-hidden group">
+                             <div id="cardBadge" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-xl text-xl font-bold uppercase tracking-widest mb-8 shadow-lg"></div>
+                             
+                             <h1 id="cardHeadline" class="text-[100px] font-extrabold leading-[0.95] tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-indigo-200 mb-8 drop-shadow-sm"></h1>
+                             
+                             <p id="cardSubtext" class="text-5xl text-slate-400 font-medium leading-tight max-w-4xl"></p>
+
+                             <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
+                        </div>
                     </div>
 
-                    <div class="flex items-center gap-4 border-t border-white/10 pt-8">
-                        <div class="w-4 h-4 rounded-full bg-green-500 animate-pulse"></div>
-                        <span class="text-2xl text-slate-500 uppercase tracking-widest font-bold">Powered by Andika AI</span>
+                    <div class="flex items-center gap-4 border-t border-white/10 pt-10">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                            <span class="text-xl">🤖</span>
+                        </div>
+                        <div>
+                            <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Generated By</div>
+                            <div class="text-3xl text-white font-bold tracking-tight">Andika AI™</div>
+                        </div>
                     </div>
                 </div>
             `,
 
-            // 2. QUOTE (Serif / Centered / Minimal / Dark Mode)
+            // QUOTE LAYOUT (Keep these distinct for variety)
             quote: `
-                <div class="absolute inset-0 bg-[#050505] z-0">
-                     <div class="absolute inset-0 bg-noise opacity-20"></div>
-                     <div class="absolute top-10 left-10 text-[600px] leading-none font-serif text-white opacity-[0.03]">“</div>
-                </div>
-
+                <div class="absolute inset-0 bg-[#050505] z-0"><div class="absolute inset-0 bg-noise opacity-20"></div><div class="absolute top-10 left-10 text-[600px] leading-none font-serif text-white opacity-[0.03]">“</div></div>
                 <div class="relative z-10 h-full p-24 flex flex-col justify-center text-center">
-                    <div class="absolute top-12 left-0 w-full flex justify-center opacity-50">
-                        <img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-12 w-auto grayscale">
-                    </div>
-
+                    <div class="absolute top-12 left-0 w-full flex justify-center opacity-50"><img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-12 w-auto grayscale"></div>
                     <div id="cardBadge" class="mx-auto mb-12 border border-white/20 text-white/60 px-6 py-2 rounded-full text-lg font-serif italic tracking-widest"></div>
-
                     <h1 id="cardHeadline" class="text-[90px] font-serif font-bold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-12"></h1>
-                    
                     <div class="w-24 h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-12"></div>
-
                     <p id="cardSubtext" class="text-3xl text-slate-400 font-sans tracking-widest uppercase"></p>
                 </div>
             `,
 
-            // 3. NEWS (Impact / Diagonal Stripes / Urgent)
+            // NEWS LAYOUT
             news: `
-                <div class="absolute inset-0 bg-orange-950 z-0">
-                    <div class="absolute inset-0 hazard-stripes opacity-20"></div>
-                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent"></div>
-                </div>
-
+                <div class="absolute inset-0 bg-orange-950 z-0"><div class="absolute inset-0" style="background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 10px, transparent 10px, transparent 20px);"></div><div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent"></div></div>
                 <div class="relative z-10 h-full flex flex-col">
-                    <div class="bg-orange-600 p-8 flex justify-between items-center shadow-2xl z-20">
-                         <span class="text-4xl font-black text-black uppercase tracking-tighter">Breaking News</span>
-                         <img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-12 w-auto brightness-0 invert">
-                    </div>
-
+                    <div class="bg-orange-600 p-8 flex justify-between items-center shadow-2xl z-20"><span class="text-4xl font-black text-black uppercase tracking-tighter">Breaking News</span><img src="https://i.imgur.com/Tjflz2Z.png" crossorigin="anonymous" class="h-12 w-auto brightness-0 invert"></div>
                     <div class="flex-grow flex flex-col justify-center p-20">
                          <div id="cardBadge" class="self-start bg-white text-orange-900 px-6 py-2 font-black text-2xl uppercase tracking-widest mb-6 transform -skew-x-12"></div>
-                         
                          <h1 id="cardHeadline" class="text-[120px] font-black uppercase leading-[0.85] text-white drop-shadow-xl mb-8"></h1>
-                         
                          <p id="cardSubtext" class="text-5xl font-bold text-orange-200 border-l-8 border-orange-500 pl-8"></p>
-                    </div>
-
-                    <div class="bg-black border-t border-orange-900 p-8">
-                        <div class="text-3xl text-white font-mono uppercase tracking-widest">>> Official Jobmington Announcement >></div>
                     </div>
                 </div>
             `
         };
 
-        // --- LOGIC ---
-
         function setLayout(type) {
-            const container = document.getElementById('capture-target');
-            container.innerHTML = templates[type];
-            
-            // Set default text based on layout to guide the user
-            if(type === 'recruit') {
+            document.getElementById('capture-target').innerHTML = templates[type];
+            if(type === 'onyx') {
                 document.getElementById('headlineInput').value = "We Are Hiring.";
-                document.getElementById('subtextInput').value = "Senior Dev Needed.";
+                document.getElementById('subtextInput').value = "Senior PHP Dev needed.";
                 document.getElementById('badgeInput').value = "Apply Now";
             } else if (type === 'quote') {
-                document.getElementById('headlineInput').value = "Talent is universal. Opportunity is not.";
+                document.getElementById('headlineInput').value = "Talent is everywhere.";
                 document.getElementById('subtextInput').value = "- Victor, Founder";
                 document.getElementById('badgeInput').value = "Vision";
             } else if (type === 'news') {
-                document.getElementById('headlineInput').value = "Platform Live.";
-                document.getElementById('subtextInput').value = "Waitlist is now open to the public.";
+                document.getElementById('headlineInput').value = "We are Live.";
+                document.getElementById('subtextInput').value = "Jobmington v1.0 Launch.";
                 document.getElementById('badgeInput').value = "Update";
             }
-            
             updateCard();
         }
 
         function updateCard() {
-            // Update state
             state.headline = document.getElementById('headlineInput').value;
             state.subtext = document.getElementById('subtextInput').value;
             state.badge = document.getElementById('badgeInput').value;
-
-            // Inject into DOM
             if(document.getElementById('cardHeadline')) document.getElementById('cardHeadline').innerText = state.headline;
             if(document.getElementById('cardSubtext')) document.getElementById('cardSubtext').innerText = state.subtext;
             if(document.getElementById('cardBadge')) document.getElementById('cardBadge').innerText = state.badge;
@@ -200,7 +180,6 @@
             const wrapper = document.getElementById('preview-wrapper');
             const screenWidth = window.innerWidth;
             const scale = (screenWidth - 20) / 1080; 
-            
             card.style.transform = `scale(${scale})`;
             card.style.transformOrigin = 'top center';
             wrapper.style.height = `${1080 * scale + 20}px`;
@@ -210,32 +189,13 @@
             var node = document.getElementById('capture-target');
             var btn = document.getElementById('downloadBtn');
             var originalText = btn.innerText;
-            btn.innerText = '...';
-            
-            var options = {
-                width: 1080,
-                height: 1080,
-                pixelRatio: 1,
-                style: { transform: 'none', transformOrigin: 'top left' }
-            };
-
-            htmlToImage.toPng(node, options)
-                .then(function (dataUrl) {
-                    download(dataUrl, 'Jobmington-Post.png');
-                    btn.innerText = originalText;
-                })
-                .catch(function (error) {
-                    alert('Error. Refresh page.');
-                    btn.innerText = originalText;
-                });
+            btn.innerText = 'Rendering...';
+            var options = { width: 1080, height: 1080, pixelRatio: 1, style: { transform: 'none', transformOrigin: 'top left' } };
+            htmlToImage.toPng(node, options).then(function (dataUrl) { download(dataUrl, 'Jobmington-Post.png'); btn.innerText = originalText; }).catch(function (error) { alert('Error. Refresh page.'); btn.innerText = originalText; });
         }
 
-        // Init
         window.addEventListener('resize', resizePreview);
-        window.addEventListener('load', () => {
-            setLayout('recruit'); // Start with Recruit layout
-            resizePreview();
-        });
+        window.addEventListener('load', () => { setLayout('onyx'); resizePreview(); });
     </script>
 </body>
 </html>
