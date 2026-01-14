@@ -77,96 +77,139 @@
         </div>
     </nav>
 
-    <main class="relative z-10 w-full max-w-7xl mx-auto px-6 mt-8 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-6 pb-20">
+    <main class="relative z-10 w-full max-w-7xl mx-auto px-6 mt-8 md:mt-16 pb-20">
 
-        <div class="md:col-span-7 flex flex-col justify-center text-left pt-10 md:pt-0">
-            <div class="inline-flex w-fit items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-                System Online
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] mb-6">
-                Stop applying. <br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-indigo-300 animate-shimmer bg-[length:200%_100%]">Start getting hired.</span>
-            </h1>
-
-            <p class="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
-                Most job boards are graveyards for CVs. <strong>Jobmington</strong> uses <strong>Andika AI™</strong> to actively match your skills with employers looking for African talent right now.
-            </p>
-
-            <form action="https://formsubmit.co/osadebeakaeze@gmail.com" method="POST" id="waitlistForm" class="relative max-w-md w-full">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="New Jobmington Waitlist Signup!">
-                <input type="hidden" name="_template" value="table">
-                
-                <div class="relative flex items-center">
-                    <input type="email" name="email" required placeholder="Enter your email address" 
-                        class="w-full h-14 pl-6 pr-40 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md">
-                    
-                    <button type="submit" class="absolute right-2 top-2 bottom-2 bg-white text-black hover:bg-slate-200 font-bold px-6 rounded-lg transition-all text-sm flex items-center gap-2 group">
-                        Join
-                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </button>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12">
+            <div class="md:col-span-7 flex flex-col justify-center text-left pt-10 md:pt-0">
+                <div class="inline-flex w-fit items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                    System Online
                 </div>
-                <p id="statusMessage" class="text-xs text-green-400 mt-3 hidden font-semibold flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> Access Requested. Check your email.
+                
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] mb-6">
+                    Stop applying. <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-indigo-300 animate-shimmer bg-[length:200%_100%]">Start getting hired.</span>
+                </h1>
+
+                <p class="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
+                    Most job boards are graveyards for CVs. <strong>Jobmington</strong> uses <strong>Andika AI™</strong> to actively match your skills with employers looking for African talent right now.
                 </p>
-            </form>
-        </div>
 
-        <div class="lg:col-span-5 relative h-[400px] md:h-[500px]">
-            <div class="absolute inset-0 bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden p-6 flex flex-col justify-between group hover:border-indigo-500/30 transition-colors duration-500 backdrop-blur-sm">
-                
-                <div class="space-y-4">
+                <form action="https://formsubmit.co/osadebeakaeze@gmail.com" method="POST" id="waitlistForm" class="relative max-w-md w-full">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Jobmington Waitlist Signup!">
+                    <input type="hidden" name="_template" value="table">
                     
-                    <div class="flex items-start gap-3 opacity-50">
-                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs text-slate-400">You</div>
-                        <div class="bg-slate-800/50 p-3 rounded-lg rounded-tl-none text-sm text-slate-300 w-3/4">
-                            How can I land a Project Manager role in Abuja?
-                        </div>
-                    </div>
+                    <label class="block text-sm font-medium text-indigo-200 mb-2">Join the waitlist to get early access and personalized CV feedback.</label>
 
-                    <div class="flex items-start gap-3">
-                        <div class="w-12 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-indigo-500/30">Andika</div>
-                        <div class="bg-indigo-600/10 border border-indigo-500/20 p-3 rounded-lg rounded-tl-none text-sm text-indigo-100 w-full shadow-[0_0_30px_rgba(79,70,229,0.1)]">
-                            <p class="mb-2">I analyzed your past experience. You need to highlight your <strong>Budgeting & Risk Management</strong> skills.</p>
-                            
-                            <div class="h-1 w-full bg-indigo-500/20 rounded-full overflow-hidden">
-                                <div class="h-full bg-indigo-400 w-2/3 animate-pulse"></div>
+                    <div class="relative flex items-center">
+                        <input type="email" name="email" required placeholder="Enter your email address" 
+                            class="w-full h-14 pl-6 pr-40 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all backdrop-blur-md">
+                        
+                        <button type="submit" class="absolute right-2 top-2 bottom-2 bg-white text-black hover:bg-slate-200 font-bold px-6 rounded-lg transition-all text-sm flex items-center gap-2 group">
+                            Join
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="flex justify-between items-start mt-3">
+                        <p class="text-xs text-slate-500">No spam. You’ll only get launch updates and product invites.</p>
+                        <p id="statusMessage" class="text-xs text-green-400 hidden font-semibold flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> Access Requested.
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="lg:col-span-5 relative h-[450px]">
+                <div class="absolute inset-0 bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden p-6 flex flex-col justify-between group hover:border-indigo-500/30 transition-colors duration-500 backdrop-blur-sm">
+                    
+                    <div class="space-y-6">
+                        
+                        <div class="flex items-start gap-3 opacity-60">
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs text-slate-400">You</div>
+                            <div class="space-y-1 w-3/4">
+                                <div class="text-[10px] uppercase tracking-wide text-slate-500">Before (Raw Input)</div>
+                                <div class="bg-slate-800/50 p-3 rounded-lg rounded-tl-none text-sm text-slate-300">
+                                    "I managed a team of 5 people and we increased sales."
+                                </div>
                             </div>
-                            <p class="text-[10px] mt-2 text-indigo-300 uppercase tracking-wider">Optimizing Resume...</p>
                         </div>
-                    </div>
-                </div> <div class="flex justify-between items-end border-t border-white/5 pt-6">
-                    <div>
-                        <div class="text-xs text-slate-500 uppercase tracking-widest mb-1">Status</div>
-                        <div class="text-sm font-semibold text-white flex items-center gap-2">
-                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Live
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-4xl font-bold text-white/10 group-hover:text-white/20 transition-colors">01</div>
-                    </div>
-                </div>
 
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-indigo-500/30">Andika</div>
+                            <div class="space-y-1 w-full">
+                                <div class="text-[10px] uppercase tracking-wide text-indigo-400">After (Optimized)</div>
+                                <div class="bg-indigo-600/10 border border-indigo-500/20 p-3 rounded-lg rounded-tl-none text-sm text-indigo-100 shadow-[0_0_30px_rgba(79,70,229,0.1)]">
+                                    <p class="mb-2">"Led a cross-functional team of 5, executing a strategy that drove a <strong>40% revenue increase</strong> year-over-year."</p>
+                                    
+                                    <div class="h-1 w-full bg-indigo-500/20 rounded-full overflow-hidden">
+                                        <div class="h-full bg-indigo-400 w-full"></div>
+                                    </div>
+                                    <p class="text-[10px] mt-2 text-indigo-300 uppercase tracking-wider">Impact Score: 98/100</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="flex justify-between items-end border-t border-white/5 pt-6">
+                        <div>
+                            <div class="text-xs text-slate-500 uppercase tracking-widest mb-1">Status</div>
+                            <div class="text-sm font-semibold text-white flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Live
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-4xl font-bold text-white/10 group-hover:text-white/20 transition-colors">01</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
-        <div class="md:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-            <div class="bento-card p-6 rounded-xl text-center md:text-left hover:bg-white/5 transition-colors">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 mb-8 border-t border-white/5 pt-12">
+            <div class="space-y-3">
+                <h3 class="text-xl font-bold text-white">How it works</h3>
+                <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                    <li>Upload your current raw profile.</li>
+                    <li>Andika AI™ optimizes it for impact.</li>
+                    <li>Get matched instantly with open roles.</li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-xl font-bold text-white">Who it’s for</h3>
+                <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                    <li>Career starters looking for a break.</li>
+                    <li>Mid-level pros seeking rapid growth.</li>
+                    <li>Remote workers targeting global gigs.</li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-xl font-bold text-white">Why it’s different</h3>
+                <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                    <li>No endless applying—jobs find you.</li>
+                    <li>Real-time CV feedback, not just hosting.</li>
+                    <li>Built specifically for African talent.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bento-card p-6 rounded-xl text-center md:text-left hover:bg-white/5 transition-colors col-span-2 md:col-span-1">
                 <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Waitlist</div>
-                <div class="text-2xl font-bold text-white">2,400+</div>
+                <div class="text-lg font-bold text-white leading-tight">2,400+ professionals building careers.</div>
             </div>
             <div class="bento-card p-6 rounded-xl text-center md:text-left hover:bg-white/5 transition-colors">
-                <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Internal Engine</div>
-                <div class="text-2xl font-bold text-white">Andika AI™</div>
+                <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Engine</div>
+                <div class="text-xl font-bold text-white">Andika AI™</div>
             </div>
             <div class="bento-card p-6 rounded-xl text-center md:text-left hover:bg-white/5 transition-colors">
                 <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Security</div>
-                <div class="text-2xl font-bold text-white">Enterprise</div>
+                <div class="text-sm font-medium text-slate-300">Enterprise-grade security. Your data is never shared.</div>
             </div>
             <div class="bento-card p-6 rounded-xl text-center md:text-left hover:bg-white/5 transition-colors flex items-center justify-center md:justify-start gap-3">
-                <div class="h-8 w-8 rounded bg-white flex items-center justify-center">
+                <div class="h-8 w-8 rounded bg-white flex items-center justify-center shrink-0">
                    <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </div>
                 <a href="https://www.linkedin.com/company/jobmington/" target="_blank" class="text-sm font-semibold hover:underline decoration-indigo-500 underline-offset-4">Follow Us</a>
